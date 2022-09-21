@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+
+import functools
+import time
+
+
+@log()
 def split_str(seq, chunk, skip_tail=False):
     lst = []
     if chunk <= len(seq):
@@ -8,6 +15,26 @@ def split_str(seq, chunk, skip_tail=False):
     return lst
 
 
-if 0:
+# ============================================================
+# ============================================================
+def log(text=''):
+    def metric(fn):
+        @functools.wraps(fn)
+        def wrapper(*args, **kwargs):
+            t_begin = time.time()
+            # print('%s start at %0.4f' % (fn.__name__, t_begin))
+            res = fn(*args, **kwargs)
+            # print(f'{text} {fn.__name__} executed in {time.time()-t_begin} s')
+            print(f'{text} {fn.__name__} executed in {(time.time() - t_begin) * 1000} ms')
+            return res
+
+        return wrapper
+
+    return metric
+# ============================================================
+#
+# ============================================================
+if __name__ == '__main__':
     seq = "123456789abcdefghij"
+    
     print(split_str(seq, 3))
