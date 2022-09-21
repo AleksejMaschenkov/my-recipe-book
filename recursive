@@ -1,0 +1,13 @@
+def split_str(seq, chunk, skip_tail=False):
+    lst = []
+    if chunk <= len(seq):
+        lst.extend([seq[:chunk]])
+        lst.extend(split_str(seq[chunk:], chunk, skip_tail))
+    elif not skip_tail and seq:
+        lst.extend([seq])
+    return lst
+
+
+if 0:
+    seq = "123456789abcdefghij"
+    print(split_str(seq, 3))
