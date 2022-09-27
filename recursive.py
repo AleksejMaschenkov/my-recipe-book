@@ -14,6 +14,7 @@ def log(text=''):
     def examp_test_sped(x, y):
         return x + y
     """
+
     def metric(fn):
         @functools.wraps(fn)
         def wrapper(*args, **kwargs):
@@ -30,7 +31,7 @@ def log(text=''):
 # ============================================================
 #                     RECURS
 # ============================================================
-@log()
+@log('time')
 def split_str(seq, chunk, skip_tail=False):
     lst = []
     if chunk <= len(seq):
@@ -45,15 +46,14 @@ def split_str(seq, chunk, skip_tail=False):
 #
 # ============================================================
 if __name__ == '__main__':
-    @log('EXAMPLE')
+    @log('EXAMPLE decorator @log')
     def examp_test_sped(x, y):
         time.sleep(0.01)
         return x + y
 
-
     temp = examp_test_sped(20, 50)
-
     print('----------------------------------------------')
+    
     mystr0 = [1, 2, 5, 8, 555, 100000, 'xxxxx']
     print(f'SRC:{mystr0}')
     print('result:', split_str(mystr0, 3))
@@ -62,3 +62,29 @@ if __name__ == '__main__':
     mystr1 = "123456789abcdefghijAAAAHFRGЫРГОП лоилоилди"
     print(f'SRC:{mystr1}')
     print('result:', split_str(mystr1, 5))
+    
+"""
+
+EXAMPLE decorator @log examp_test_sped executed in 9.999990463256836 ms
+----------------------------------------------
+SRC:[1, 2, 5, 8, 555, 100000, 'xxxxx']
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+result: [[1, 2, 5], [8, 555, 100000], ['xxxxx']]
+----------------------------------------------
+SRC:123456789abcdefghijAAAAHFRGЫРГОП лоилоилди
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+time split_str executed in 0.0 ms
+result: ['12345', '6789a', 'bcdef', 'ghijA', 'AAAHF', 'RGЫРГ', 'ОП ло', 'илоил', 'ди']
+
+Process finished with exit code 0
+
+"""
