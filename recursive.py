@@ -33,6 +33,13 @@ def log(text=''):
 # ============================================================
 @log('time')
 def split_str(seq, chunk, skip_tail=False):
+    """ seq=[1, 2, 5, 8, 555, 100000, 'xxxxx'] chunk=3 result: [[1, 2, 5], [8, 555, 100000], ['xxxxx']]
+    
+    
+    seq=  "123456789abcdefghijAAAAHFRGЫРГОП лоилоилди" chunk=3
+    result: ['12345', '6789a', 'bcdef', 'ghijA', 'AAAHF', 'RGЫРГ', 'ОП ло', 'илоил', 'ди']
+    
+    """
     lst = []
     if chunk <= len(seq):
         lst.extend([seq[:chunk]])
