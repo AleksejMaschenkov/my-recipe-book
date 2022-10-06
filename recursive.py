@@ -31,6 +31,16 @@ def log(text=''):
 # ============================================================
 #                     RECURS
 # ============================================================
+
+
+def listmerge(lst):
+    """https://habr.com/ru/post/63539/ слияние списков"""
+    res = []
+    for el in lst:
+        res += listmerge(el) if isinstance(el, list) else [el]
+    return res
+
+
 @log('time')
 def split_str(seq, chunk, skip_tail=False):
     """ seq=[1, 2, 5, 8, 555, 100000, 'xxxxx'] chunk=3 result: [[1, 2, 5], [8, 555, 100000], ['xxxxx']]
