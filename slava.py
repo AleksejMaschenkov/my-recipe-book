@@ -195,9 +195,11 @@ class MicroMail(object):
 
     @property
     def reader(self):
-        addr = self.email_message.get_all('To')[0]
-        return parseaddr(addr)[1]
-
+        try:
+            addr = self.email_message.get_all('To')[0]
+            return parseaddr(addr)[1]
+        except:
+            return '?'
 
 # ============================================================
 #
