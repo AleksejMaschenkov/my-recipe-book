@@ -1,9 +1,14 @@
 # -*- coding: utf-8 -*-
 
 """
-   Преобразоание json файла FireFox в форму для построения дерева
+   Преобразоание json файла FireFox в форму для построения дерева.
+   json файл - рекурсивный (вложения во вложениях элементов)
+   получаем список словарей с доп ключами 'level',  'parent'
+   'children' -> изменяется на список идентификаторов детей (без вложений) 
+   
+   
    Converting a FireFox json file to a form for building a tree
-
+   append 
    !!!!!!   json_obj_to_list_gener(json_obj) !!!!!!
 """
 import copy
@@ -69,7 +74,7 @@ def builder_json_gener(json_nfile: str):
     return src
 
 # =============================================================================
-#
+#                    DOVECOT (alternstive)
 # =============================================================================
 def item_all_cpecial(json_input):
     rez = []
