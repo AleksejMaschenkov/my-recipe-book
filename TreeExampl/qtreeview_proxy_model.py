@@ -100,6 +100,7 @@ class MainFrame(QDialog):
         # --------------------------------------------------------------------------
         self.w_tree = QTreeView()
         self.w_tree.setModel(self.proxyModel)
+        self.w_tree.setToolTip('Двойной клик на http - открытие ссылки')
         self.w_tree.doubleClicked.connect(self.act_doubleClicked)
 
         self.w_tree.setEditTriggers(QAbstractItemView.NoEditTriggers)
