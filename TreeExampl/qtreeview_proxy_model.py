@@ -67,12 +67,14 @@ class CustomSortFilterProxyModel(QSortFilterProxyModel):
 # =========================================================
 #
 # =========================================================
+"""
+
 #     # proxyModel.invalidateColumnsFilter()
 #     # proxyModel.invalidateFilter()
 #     proxyModel.setFilterKeyColumn(1)
 #     # sourceModel.dataChanged.emit(ind,ind)
 #     view.setSortingEnabled(True)
-"""
+
         # https://stackoverflow.com/questions/51199230/how-to-add-column-before-treecolumn-in-qt-qtreeview
         # self.header().swapSections(2, 1);
         # self.header().swapSections(0, 1);
@@ -84,7 +86,7 @@ class CustomSortFilterProxyModel(QSortFilterProxyModel):
 
 class MainFrame(QDialog):
     def __init__(self, parent, tree_data):
-        super(MainFrame, self).__init__(parent)
+        super().__init__(parent)
 
         self.sourceModel = QStandardItemModel()
         self.sourceModel.setHorizontalHeaderLabels(["Level", "Values"])
@@ -95,22 +97,18 @@ class MainFrame(QDialog):
         self.proxyModel = CustomSortFilterProxyModel(self)
         self.proxyModel.setSourceModel(self.sourceModel)
         # self.proxyModel.setFilterKeyColumn(1)
-
+        # --------------------------------------------------------------------------
         self.w_tree = QTreeView()
         self.w_tree.setModel(self.proxyModel)
         self.w_tree.doubleClicked.connect(self.act_doubleClicked)
 
         self.w_tree.setEditTriggers(QAbstractItemView.NoEditTriggers)
         # self.w_tree.header().setSectionResizeMode(QHeaderView.ResizeToContents)
-        # self.w_tree.header().setSectionResizeMode(QHeaderView.ResizeToContents)
         self.w_tree.setColumnWidth(0, 500)
 
         self.w_tree.setSortingEnabled(True)
         self.w_tree.sortByColumn(1, Qt.AscendingOrder);
-
-
-
-        #
+        # --------------------------------------------------------------------------
         self.w_filterEdit = QLineEdit()
         self.w_filterEdit.textChanged.connect(self.act_w_filterEdit)
         #
@@ -129,7 +127,7 @@ class MainFrame(QDialog):
 
         self.bt_moveSection = QPushButton("moveSection")
         self.bt_moveSection.clicked.connect(self.act_bt_moveSection)
-
+        # --------------------------------------------------------------------------
         layout = QVBoxLayout(self)
         layout.addWidget(self.w_filterEdit)
         layout.addWidget(self.w_checkb)
@@ -173,6 +171,7 @@ class MainFrame(QDialog):
     def act_bt_sort(self):
         # https://www.linux.org.ru/forum/development/12578241
         self.proxyModel.sort(-1)
+        self.w_tree.expandAll()
         # self.w_tree.sortByColumn(-1, Qt.AscendingOrder);
 
     def act_bt_pos(self):
