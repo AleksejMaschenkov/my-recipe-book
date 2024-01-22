@@ -1,3 +1,15 @@
+# -*- coding: utf-8 -*-
+
+from typing import Union
+
+from PyQt5.QtCore import Qt, QRect
+from PyQt5.QtGui import QBrush, QPainter, QPixmap
+from PyQt5.QtWidgets import QLabel
+
+
+# =========================================================
+#
+# =========================================================
 class AvatarLabel(QLabel):
     """ Circle avatar label """
 
@@ -32,3 +44,29 @@ class AvatarLabel(QLabel):
         temp = self.__pixmap.scaled(a, a, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
         painter.setBrush(QBrush(temp))
         painter.drawRoundedRect(rect, r, r)
+
+# =========================================================
+#
+# =========================================================
+if __name__ == '__main__':
+    import sys
+    from PyQt5.QtWidgets import QApplication
+
+    f_name = r'C:\PYTHON_LEXA\PY_BookCase1\bookcase\bibl_widgets\labels\Tsar_Alexander_III_of_Russia_2.jpg'
+    app = QApplication([])
+    # -----------------------------------------
+    def get_bytes(file):
+        with open(file, 'rb') as f:
+            h = f.read()
+            return h
+
+
+    pm = QPixmap()
+    pm.loadFromData(get_bytes(f_name))
+
+    ll = [pm, f_name, None]
+    my_label = AvatarLabel(ll[1])
+    my_label.show()
+    # ---------------------------------------------
+    sys.exit(app.exec_())
+
